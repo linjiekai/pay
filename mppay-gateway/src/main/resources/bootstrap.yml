@@ -1,0 +1,71 @@
+#设置自己启动的端口 如下都是默认配置
+server:
+  port: 15103
+  tomcat:
+    max-connections: 20000
+    max-threads: 500
+    min-spare-threads: 50
+    uri-encoding: UTF-8
+    
+spring:
+  application:
+    name: pay-api
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:15100
+        #server-addr: 47.112.241.96:15100
+        #namespace: 0b9b0579-4b43-4422-9c05-4bb0ef5d7f87 #自己有配置中心则换成你的ID
+      config:
+        server-addr: 127.0.0.1:15100
+        #server-addr: 47.112.241.96:15100
+        #namespace: 0b9b0579-4b43-4422-9c05-4bb0ef5d7f87 #自己有配置中心则换成你的ID
+        group: PAY
+        file-extension: yml
+        ext-config[0]:
+          data-id: pay-api.yml
+          group: PAY
+          refresh: true
+        ext-config[1]:
+          data-id: pay-db.yml
+          group: PAY
+          refresh: true
+        ext-config[2]:
+          data-id: pay-conf.yml
+          group: PAY
+          refresh: true
+        ext-config[3]:
+          data-id: pay-cache.yml
+          group: PAY
+          refresh: true
+        ext-config[4]:
+          data-id: pay-mq.yml
+          group: PAY
+          refresh: true
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  messages:
+    encoding: UTF-8
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+mq.listener.switch: false
+
+logging:
+  level:
+    com.mppay: debug
+    org.springframework: info
+    org.mybatis: info

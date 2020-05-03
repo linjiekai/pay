@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+
+    <springProfile name="dev">
+        <property name="log.path" value="C:/logs/mppay" />
+    </springProfile>
+
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%L] -[%X{LOGGER_ID}] ======  %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-sys.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/mppay-sys/sys.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <!--每10MB生成一个zip-->
+            <maxFileSize>10MB</maxFileSize>
+            <!--最多保留100个zip-->
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="errorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/error/mppay-error.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="warnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-warn.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/warn/mppay-warn.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="infoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/info/mppay-info.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--mq专用-->
+    <appender name="mqFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-mq.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/mq/mppay-mq.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%C:%M:%L] - (((xfhl(((%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="notify" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-notify.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/notify/mppay-notify.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} : [%C:%M:%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="scheduled" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mppay-scheduled.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logzip/scheduled/mppay-scheduled.%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level  : [%C:%M:%L] - [%X{LOGGER_ID}] ====== %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO" addtivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+    <logger name="org.mybatis" level="INFO" addtivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="infoFile"/>
+    </logger>
+
+    <logger name="com.mppay" level="ERROR" addtivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="errorFile"/>
+    </logger>
+
+    <logger name="com.mppay" level="WARN" addtivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="warnFile"/>
+    </logger>
+
+    <logger name="com.mppay" level="DEBUG" addtivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="infoFile"/>
+    </logger>
+    <logger name="com.mppay.core.utils.MQLogUtil" level="DEBUG" addtivity="false">
+        <appender-ref ref="mqFile"/>
+    </logger>
+
+    <logger name="notify" addtivity="false">
+        <appender-ref ref="notify"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="scheduled" addtivity="false">
+        <appender-ref ref="scheduled"/>
+        <appender-ref ref="console"/>
+    </logger>
+</configuration>
+

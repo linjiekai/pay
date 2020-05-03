@@ -1,0 +1,41 @@
+# admin-api
+AdminCardBindController:
+  withdrBankList:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+    mobile: "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"
+  lastBindByUserIds:
+    mercId: "[0-9]{4,15}"
+    userIds: "^\[\]$"
+  getCardBindByAgrNo:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+    agrNo: ".+"
+
+AdminQuickAgrController:
+  quickBankList:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+    mobile: "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"
+
+AdminUserOperController:
+  cancelRealName:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+
+AdminWithdrOrderController:
+  audit:
+    withdrOrderNo: "^[0-9]\\d*$"
+    auditStatus: "1|2"
+    auditor: ".+"
+  list:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+    nickname: ".+"
+
+AdminUserRealNameDetailsController:
+  list:
+    mercId: "[0-9]{4,15}"
+    userId: "^[0-9]\\d*$"
+    cardNo: "^[0-9]\\d*$"
+    realSource: "0|1|2"

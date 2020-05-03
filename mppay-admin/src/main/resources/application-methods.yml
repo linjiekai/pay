@@ -1,0 +1,18 @@
+# admin-api
+AdminCardBindController:
+  withdrBankList: "mercId,[userId],[mobile]"
+  lastBindByUserIds: "mercId,userIds"
+  getCardBindByAgrNo: "mercId,userId,agrNo"
+
+AdminQuickAgrController:
+  quickBankList: "mercId,[userId],[mobile]"
+
+AdminUserOperController:
+  cancelRealName: "mercId,userId"
+
+AdminWithdrOrderController:
+  audit: "withdrOrderNo,auditStatus,auditor"
+  list: "mercId,[userId],[nickname]"
+
+AdminUserRealNameDetailsController:
+  list: "mercId,[userId],[cardNo],[realSource]"
